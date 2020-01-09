@@ -103,3 +103,26 @@ function mouseReleased()
 	synth.triggerRelease();
 }
 
+function touchStarted()
+{
+	for(tapBtn of tapBtns)
+	{
+		if(tapBtn.isTouched())
+		{
+			let keyNum = tapBtn.allotedKey;
+			let noteFreq = midiToFreq(musicalKey[keyNum]);
+			synth.triggerAttack(noteFreq);
+			break;
+		}
+	}
+
+	if(changeRootNoteBtn.isTouched())
+	{
+		changeRootNote();
+	}
+}
+
+function touchEnded()
+{
+	synth.triggerRelease();
+}
