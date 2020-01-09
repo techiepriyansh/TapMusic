@@ -23,6 +23,16 @@ function setup()
 
 }
 
+function windowResized()
+{
+	createCanvas(window.innerWidth, window.innerHeight);
+	background(bgColor);
+	textAlign(CENTER);
+	rectMode(CENTER);
+
+	createTapButtons();
+}
+
 
 function createTapButtons()
 {
@@ -34,7 +44,7 @@ function createTapButtons()
 		let x = ((i%3)+1) * padding + ((width - 4*padding)/6) * (2*(i%3) + 1) ;
 
 		tapBtn = new TapButton(x, y, (width - 4*padding)/3,(height - 4*padding)/3,i+1);
-		tapBtns.push(tapBtn);
+		tapBtns[i] = tapBtn;
 	}
 
 	let i = 8;
