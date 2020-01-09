@@ -4,11 +4,12 @@ let textColor = 205;
 
 class TapButton
 {
-	constructor(x,y,a,allotedKey)
+	constructor(x,y,w,h,allotedKey)
 	{
 		this.x = x;
 		this.y = y;
-		this.a = a;
+		this.w = w;
+		this.h = h;
 		this.allotedKey = allotedKey;
 		this.color = tapBtnNormalColor;
 	}
@@ -17,10 +18,10 @@ class TapButton
 	update()
 	{
 		//detecting if mouse is clicks this
-		if(mouseX < this.x + this.a/2 &&
-		   mouseX > this.x - this.a/2 &&
-		   mouseY < this.y + this.a/2 &&
-		   mouseY > this.y - this.a/2 &&
+		if(mouseX < this.x + this.w/2 &&
+		   mouseX > this.x - this.w/2 &&
+		   mouseY < this.y + this.h/2 &&
+		   mouseY > this.y - this.h/2 &&
 		   mouseIsPressed)
 		{
 			this.color = tapBtnGlowColor;
@@ -36,7 +37,7 @@ class TapButton
 
 		noStroke();
 		fill(this.color);
-		rect(this.x,this.y,this.a,this.a);
+		rect(this.x,this.y,this.w,this.h);
 
 
 		fill(textColor)
@@ -48,12 +49,12 @@ class TapButton
 
 	isMouseOverMe()
 	{
-		if(mouseX < this.x + this.a/2 &&
-		   mouseX > this.x - this.a/2 &&
-		   mouseY < this.y + this.a/2 &&
-		   mouseY > this.y - this.a/2)
+		if(mouseX < this.x + this.w/2 &&
+		   mouseX > this.x - this.w/2 &&
+		   mouseY < this.y + this.h/2 &&
+		   mouseY > this.y - this.h/2)
 		{
-			return true
+			return true;
 		}		
 
 		else
@@ -63,4 +64,58 @@ class TapButton
 
 	}
 
+}
+
+class ChangeRootNoteButton{
+
+	constructor(x,y,w,h)
+	{
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+		this.color = tapBtnNormalColor;
+	}
+
+	update()
+	{
+
+		if(this.isMouseOverMe() && mouseIsPressed)
+		{
+			this.color = tapBtnGlowColor;
+		}
+		else
+		{
+			this.color = tapBtnNormalColor;
+		}
+
+		noStroke();
+		fill(this.color);
+		rect(this.x,this.y,this.w,this.h);
+
+		fill(textColor)
+		textSize(20);
+		text("Change Root Note \n" + rootNote,this.x,this.y);		
+
+
+	}
+
+
+
+	isMouseOverMe()
+	{
+		if(mouseX < this.x + this.w/2 &&
+		   mouseX > this.x - this.w/2 &&
+		   mouseY < this.y + this.h/2 &&
+		   mouseY > this.y - this.h/2)
+		{
+			return true;
+		}		
+
+		else
+		{
+			return false;
+		}
+
+	}
 }
