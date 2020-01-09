@@ -64,6 +64,26 @@ class TapButton
 
 	}
 
+	isTouched()
+	{
+		touchX = touch[0].x;
+		touchY = touch[0].y;
+
+		if(touchX < this.x + this.w/2 &&
+		   touchX > this.x - this.w/2 &&
+		   touchY < this.y + this.h/2 &&
+		   touchY > this.y - this.h/2)
+		{
+			return true;
+		}		
+
+		else
+		{
+			return false;
+		}
+
+	}
+
 }
 
 class ChangeRootNoteButton{
@@ -108,6 +128,26 @@ class ChangeRootNoteButton{
 		   mouseX > this.x - this.w/2 &&
 		   mouseY < this.y + this.h/2 &&
 		   mouseY > this.y - this.h/2)
+		{
+			return true;
+		}		
+
+		else
+		{
+			return false;
+		}
+
+	}
+
+	isTouched()
+	{
+		touchX = touch[0].x;
+		touchY = touch[0].y;
+
+		if(touchX < this.x + this.w/2 &&
+		   touchX > this.x - this.w/2 &&
+		   touchY < this.y + this.h/2 &&
+		   touchY > this.y - this.h/2)
 		{
 			return true;
 		}		
