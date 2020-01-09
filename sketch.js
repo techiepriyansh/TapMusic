@@ -1,21 +1,20 @@
 let synth;
 let musicalKey;
+let rootNote;
 let tapBtns = [];
+let changeRootNoteBtn;
 const screenDim = 600;
 const padding = 20;
+const bgColor = 205;
 
 function setup()
 {
-	createCanvas(screenDim, screenDim);
-	background(205);
+	createCanvas(window.innerWidth, window.innerHeight);
+	background(bgColor);
 	textAlign(CENTER);
 	rectMode(CENTER);
 
 	createTapButtons();
-
-	let changeRootNoteBtn = createButton("Change Root Note");
-	changeRootNoteBtn.position(0,height + 20);
-	changeRootNoteBtn.mousePressed(changeRootNote);
 
 	changeRootNote();
 
@@ -24,33 +23,45 @@ function setup()
 
 }
 
+
 function createTapButtons()
 {
-	for(i = 0; i < 8; i++)
-	{
-		let y = (floor(i/3)+1) * padding + ((screenDim - 4*padding)/6) * (2*floor(i/3) + 1) ;
-		let x = ((i%3)+1) * padding + ((screenDim - 4*padding)/6) * (2*(i%3) + 1) ;
 
-		tapBtn = new TapButton(x, y, (screenDim - 4*padding)/3,i+1);
+
+	for(let i = 0; i < 8; i++)
+	{
+		let y = (floor(i/3)+1) * padding + ((height - 4*padding)/6) * (2*floor(i/3) + 1) ;
+		let x = ((i%3)+1) * padding + ((width - 4*padding)/6) * (2*(i%3) + 1) ;
+
+		tapBtn = new TapButton(x, y, (width - 4*padding)/3,(height - 4*padding)/3,i+1);
 		tapBtns.push(tapBtn);
 	}
+
+	let i = 8;
+	let y = (floor(i/3)+1) * padding + ((height - 4*padding)/6) * (2*floor(i/3) + 1) ;
+	let x = ((i%3)+1) * padding + ((width - 4*padding)/6) * (2*(i%3) + 1) ;
+	changeRootNoteBtn = new ChangeRootNoteButton(x, y, (width - 4*padding)/3,(height - 4*padding)/3);
+
+
 }
 
 function changeRootNote()
 {
-	let rootNote = prompt("Please enter the root note of the major key in which you want to play");
+	rootNote = prompt("Please enter the root note of the major key in which you want to play");
 	musicalKey = getMajorKey(rootNote);
 }
 
 //-------------------------------------
 function draw()
 {	
-	background(205);
+	background(bgColor);
 	
 	for(let tapBtn of tapBtns)
 	{
 		tapBtn.update();
 	}
+
+	changeRootNoteBtn.update()
 
 }
 
@@ -78,6 +89,11 @@ function mousePressed()
 			synth.triggerAttack(noteFreq);
 			break;
 		}
+	}
+
+	if(changeRootNoteBtn.isMouseOverMe())
+	{
+		changeRootNote();
 	}
 }
 
